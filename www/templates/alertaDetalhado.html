@@ -1,0 +1,22 @@
+<ion-view title="Alerta Detalhado" id="page10">
+  <ion-content padding="true" class="has-header" ng-controller="funcaoLabel">
+    <ion-list id="alertaDetalhado-list7">
+      <ion-item class="item-thumbnail-left" id="alertaDetalhado-list-item31">
+        <h2>{{labelTituloAlerta}}</h2>
+        <p>{{labelDataHoraAlerta}}</p>
+      </ion-item>
+    </ion-list>
+    <div class="item item-body" id="alertaDetalhado-list-item-container7">
+      <div id="alertaDetalhado-markdown8" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#000000;">{{labelUltimaDescricaoAlerta}}</p>
+      </div>
+      <div id="alertaDetalhado-markdown9" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#000000;">{{labelPenultimaDescricaoAlerta}}</p>
+      </div>
+      <div id="alertaDetalhado-markdown11" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#000000;">{{labelAntepenultimaDescricaoAlerta}}</p>
+      </div>
+    </div>
+    <a ui-sref="tabsController.fotoDoAlerta" id="alertaDetalhado-button12" class="button button-positive  button-block" (click)="presentLoading()">Ver foto</a>
+  </ion-content>
+</ion-view>

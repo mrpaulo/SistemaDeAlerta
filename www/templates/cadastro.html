@@ -1,0 +1,47 @@
+<ion-view title="Cadastro" id="page4" ng-controller="funcaoCadastrar">
+  <ion-content padding="true" class="has-header">
+    <form id="cadastro-form1" class="list" >
+      <label class="item item-input" id="cadastro-input1">
+        <span class="input-label">Nome</span>
+        <input type="text" ng-model="funcaoIncluir.nome">
+      </label>
+      <label class="item item-select" id="cadastro-select1">
+        <span class="input-label">Bairro</span>
+        <select ng-model="funcaoIncluir.idBairro">
+          <option ng-repeat="bairro in listaPessoas">{{bairro.idBairro}}</option>          
+        </select>
+      </label>
+      <label class="item item-input" id="cadastro-input2">
+        <span class="input-label">Celular</span>
+        <input type="tel" ng-model="funcaoIncluir.cel">
+      </label>
+    </form>
+    <button id="cadastro-button11" class="button button-dark  button-block button-clear icon ion-android-locate" ng-controller="GeoCtrl" ng-click="takeGPS()"> Usar localização GPS</button>
+    <form id="cadastro-form3" class="list">
+      <label class="item item-input" id="cadastro-input5">
+        <span class="input-label">Email</span>
+        <input type="email" ng-model="funcaoIncluir.email">
+      </label>
+      <label class="item item-input" id="cadastro-input9">
+        <span class="input-label">Senha </span>
+        <input type="text" ng-model="funcaoIncluir.senha">
+      </label>
+    </form>
+    <button id="cadastro-button1" class="button button-positive  button-block" ng-click="incluirUsuario()">Enviar</button>
+
+    <div>
+     <ul>
+              <li ng-repeat="pessoa in listaPessoas">
+                <label>Nome: {{pessoa.nome}}</label>
+                <label>Bairro: {{pessoa.idBairro}}</label> 
+                <label>Celular: {{pessoa.celular}}</label> 
+                <label>Email: {{pessoa.email}}</label> 
+                <label>Senha: {{pessoa.senha}}</label> 
+              </li>
+      </ul>
+  </div>
+  
+  </ion-content>
+ 
+ 
+</ion-view>
