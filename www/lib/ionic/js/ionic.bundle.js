@@ -24494,7 +24494,7 @@ function $HttpProvider() {
         // strip content-type if data is undefined
         if (isUndefined(reqData)) {
           forEach(headers, function(value, header) {
-            if (lowercase(header) === 'content-type') {
+            if (lowercase(header) === 'content-type') {//original é 'content-type' coloquei 'Content-Type:application/json'
                 delete headers[header];
             }
           });

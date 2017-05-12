@@ -158,27 +158,19 @@ $scope.takeGPS = function() {
 //Funcao de cadastrar usuario
 MeuApp.controller('funcaoCadastrar', function ($scope) {
 
-	$scope.listaPessoas = [];		
-	$scope.idBairro = 0;
-
-	$scope.funcaoIncluir = {
-							"nome" : "",
-							"idBairro" : "",
-							"cel" : "",
-							"email" : "",
-							"senha" : "",
-							};
-
-
 	$scope.incluirUsuario = function(){
 		
-		$scope.listaPessoas.push({
-								"nome" : $scope.funcaoIncluir.nome,
-								"idBairro" : $scope.idBairro+1,
-								"cel" : $scope.funcaoIncluir.cel,
-								"email" : $scope.funcaoIncluir.email,
-								"senha" : $scope.funcaoIncluir.senha,
-								});
+		/*var usuario = { "user" : {
+                              "type_user" : 1,
+              								"name_user" : $scope.funcaoIncluir.nome,								
+              								"phone" : $scope.funcaoIncluir.cel,
+              								"localization_user" : $scope.funcaoIncluir.senha
+                            }
+								};*/
+    var usuario = { "user" : { "type_user" : 1, "name_user" : "Segundo User", "phone" : "9889988", "localization_user" : "34,35", "password" : "12345", "notification_phone" : true}};
+                
+    Api.addUser(usuario);
+
 		$scope.funcaoIncluir = {
 								"nome" : "",
 								"idBairro" : "",
@@ -186,19 +178,50 @@ MeuApp.controller('funcaoCadastrar', function ($scope) {
 								"email" : "",
 								"senha" : "",
 								};
-	}		
-		
+	}	
+	
 })
+
 //Função para label
 MeuApp.controller('funcaoLabel', function ($scope) {
 
-	$scope.labelTituloAlerta = "Título Alerta";
-	$scope.labelDataHoraAlerta = "Data e Hora";
-	$scope.labelUltimaDescricaoAlerta = "Última descrição";
-	$scope.labelPenultimaDescricaoAlerta = "Penúltima descrição";
-	$scope.labelAntepenultimaDescricaoAlerta = "Antepenúltima descrição";
+	$scope.labelTituloAlerta = "Árvore Caída";
+	$scope.labelDataHoraAlerta = "12/05/17 - 18:03h";
+	$scope.labelUltimaDescricaoAlerta = "Transito interrompido na Av. Central";
+	$scope.labelPenultimaDescricaoAlerta = "Relato de árvore caída no centro";
+	$scope.labelAntepenultimaDescricaoAlerta = "Possível problema no Bairro Centro";
 })
+
 //implemento da notificação 
 MeuApp.controller('DashCtrl', function($scope) {
   
+});
+//Implementação da comunicação com a API
+MeuApp.controller('listaAlertCtrl', function($scope, Api) {
+
+   Api.getAlerts().then(function(result) {
+   console.log(result); 
+   $scope.list = result.data;   
+  })
+});
+
+//implementação do Maps
+MeuApp.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+  var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+ 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+ 
+  }, function(error){
+    console.log("Could not get location");
+  });
 });
