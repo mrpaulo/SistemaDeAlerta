@@ -1,6 +1,6 @@
-<ion-view title="Cadastro" id="page4" ng-controller="funcaoCadastrar">
+<ion-view title="Cadastro" id="page4" ng-controller="cadastroCtrl">
   <ion-content padding="true" class="has-header">
-    <form id="cadastro-form1" class="list" >
+    <form id="cadastro-form1" class="list" ng-model="funcaoIncluir">
       <label class="item item-input" id="cadastro-input1">
         <span class="input-label">Nome</span>
         <input type="text" ng-model="funcaoIncluir.nome">
@@ -8,7 +8,7 @@
       <label class="item item-select" id="cadastro-select1"> 
         <span class="input-label">Bairro</span>
         <select ng-model="funcaoIncluir.idBairro">
-          <option ng-repeat="bairro in listaPessoas">{{bairro.idBairro}}</option>          
+          <!-- <option ng-option="bairro in listaPessoas">{{bairro.idBairro}}</option> -->          
         </select>
       </label>
       <label class="item item-input" id="cadastro-input2">
@@ -28,20 +28,5 @@
       </label>
     </form>
     <button id="cadastro-button1" class="button button-positive  button-block" ng-click="incluirUsuario()">Cadastrar</button>
-
-    <div>
-     <ul>
-              <li ng-repeat="pessoa in listaPessoas">
-                <label>Nome: {{pessoa.nome}}</label>
-                <label>Bairro: {{pessoa.idBairro}}</label> 
-                <label>Celular: {{pessoa.celular}}</label> 
-                <label>Email: {{pessoa.email}}</label> 
-                <label>Senha: {{pessoa.senha}}</label> 
-              </li>
-      </ul>
-  </div>
-  
-  </ion-content>
- 
- 
+  </ion-content> 
 </ion-view>

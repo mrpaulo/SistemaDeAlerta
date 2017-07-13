@@ -1,55 +1,14 @@
 <ion-view title="Histórico" id="page7">
-  <ion-content padding="true" class="has-header" ng-controller="funcaoLabel">
-    <ion-list id="histRico-list5" ng-controller="listaAlertCtrl">
-      <ion-item class="item-thumbnail-left" id="histRico-list-item24" ui-sref="tabsController.alertaDetalhado">
-      <img src="img/thumbnailVermelho.jpg">
-        <h2>{{labelTituloAlerta}}</h2>
-        <p>{{labelDataHoraAlerta}}</p>
-        <p>{{labelUltimaDescricaoAlerta}}</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="histRico-list-item25" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailAmarelo.jpg">
-        <h2>Desmoronamento de encosta</h2>
-        <p>11/05/17 - 09:13h</p>
-        <p>Alerta contra transitar próximo ao rio</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="histRico-list-item26" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailAmarelo.jpg">
-        <h2>Risco de Temporal</h2>
-        <p>10/05/17 - 17:49h</p>
-        <p>Previsão de chuva forte</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="histRico-list-item27" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailVermelho.jpg">
-        <h2>Incendio em Industria</h2>
-        <p>07/05/17 - 10:22h</p>
-        <p>Lolidade interditada risco de intoxicação</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="histRico-list-item28" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailVerde.jpg">
-        <h2>Carro quebrado</h2>
-        <p>05/05/17 - 14:23h</p>
-        <p>Meia pista na Rodovia</p>       
-      </ion-item>
-
-
-       <ion-item class="item-thumbnail-left" id="histRico-list-item26" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailAmarelo.jpg">
-        <h2>Risco de Temporal</h2>
-        <p>10/05/17 - 17:49h</p>
-        <p>Previsão de chuva forte</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="histRico-list-item27" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailVermelho.jpg">
-        <h2>Incendio em Industria</h2>
-        <p>07/05/17 - 10:22h</p>
-        <p>Lolidade interditada risco de intoxicação</p>
-      </ion-item>
-      <ion-item class="item-thumbnail-left" id="histRico-list-item28" ui-sref="tabsController.alertaDetalhado">
-       <img src="img/thumbnailVerde.jpg">
-        <h2>Carro quebrado</h2>
-        <p>05/05/17 - 14:23h</p>
-        <p>Meia pista na Rodovia</p>
-    </ion-list>
+  <ion-content padding="true" class="has-header">      
+    <ion-list id="histRico-list5">
+      <div ng-repeat="lists in list">
+        <ion-item class="item-thumbnail-left" href="#/page1/page10/{{lists.id}}">
+          <img src={{lists.url_img}}>
+          <h2>Título: {{lists.title}}</h2>
+          <p>Data e hora: {{lists.date_hour}}</p>
+          <p>Descrição: {{lists.last_description}}</p> 
+        </ion-item>   
+      </div>
+    </ion-list>   
   </ion-content>
 </ion-view>

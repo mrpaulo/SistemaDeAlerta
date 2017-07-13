@@ -1,23 +1,24 @@
 <ion-view title="Alerta Detalhado" id="page10">
-  <ion-content padding="true" class="has-header" ng-controller="funcaoLabel">
+  <ion-content padding="true" class="has-header" >
     <ion-list id="alertaDetalhado-list7">    
-      <ion-item class="item-thumbnail-left" id="alertaDetalhado-list-item31">
-        <img src="img/thumbnailVermelho.jpg">
-        <h2>{{labelTituloAlerta}}</h2>
-        <p>{{labelDataHoraAlerta}}</p>
+      <ion-item class="item-thumbnail-left" >
+       <img src={{alerta.url_img}}>
+        <h2>{{alerta.title}}</h2>
+        <p>{{alerta.date_hour}}</p>
       </ion-item>
     </ion-list>
     <div class="item item-body" id="alertaDetalhado-list-item-container7">
+    <h2>Descrição:</h2>
       <div id="alertaDetalhado-markdown8" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">{{labelUltimaDescricaoAlerta}}</p>
+        <p style="margin-top:0px;color:#000000;">{{alerta.last_description}}</p>
       </div>
       <div id="alertaDetalhado-markdown9" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">{{labelPenultimaDescricaoAlerta}}</p>
+        <p style="margin-top:0px;color:#000000;">{{alerta.penultimate_description}}</p>
       </div>
       <div id="alertaDetalhado-markdown11" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">{{labelAntepenultimaDescricaoAlerta}}</p>
+        <p style="margin-top:0px;color:#000000;">{{alerta.antepenultimate_description}}</p>
       </div>
     </div>
-    <a ui-sref="tabsController.fotoDoAlerta" id="alertaDetalhado-button12" class="button button-positive  button-block" (click)="presentLoading()">Ver foto</a>
+    <a href="#/page1/page11/{{alerta.id}}" class="button button-positive  button-block">Ver foto</a>
   </ion-content>
 </ion-view>

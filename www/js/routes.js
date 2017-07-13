@@ -89,17 +89,9 @@ angular.module('app.routes', ['ionicUIRouter'])
       /page1/tab3/page10
   */
   .state('tabsController.alertaDetalhado', {
-    url: '/page10',
+    url: '/page10/:idAlert',
     views: {
       'tab1': {
-        templateUrl: 'templates/alertaDetalhado.html',
-        controller: 'alertaDetalhadoCtrl'
-      },
-      'tab2': {
-        templateUrl: 'templates/alertaDetalhado.html',
-        controller: 'alertaDetalhadoCtrl'
-      },
-      'tab3': {
         templateUrl: 'templates/alertaDetalhado.html',
         controller: 'alertaDetalhadoCtrl'
       }
@@ -121,17 +113,9 @@ angular.module('app.routes', ['ionicUIRouter'])
       /page1/tab3/page11
   */
   .state('tabsController.fotoDoAlerta', {
-    url: '/page11',
+    url: '/page11/:idAlert',
     views: {
       'tab1': {
-        templateUrl: 'templates/fotoDoAlerta.html',
-        controller: 'fotoDoAlertaCtrl'
-      },
-      'tab2': {
-        templateUrl: 'templates/fotoDoAlerta.html',
-        controller: 'fotoDoAlertaCtrl'
-      },
-      'tab3': {
         templateUrl: 'templates/fotoDoAlerta.html',
         controller: 'fotoDoAlertaCtrl'
       }

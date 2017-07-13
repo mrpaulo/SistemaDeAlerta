@@ -8,19 +8,43 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('inicioCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('inicioCtrl', ['$scope', '$stateParams', 'Alert', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, Alert) {
+  $scope.alerta = Alert.last();
 
 }])
    
-.controller('mapaCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('mapaCtrl', ['$scope', '$stateParams', '$ionicLoading', 'Alert',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, $ionicLoading, Alert) {
+  $scope.alerta = Alert.last();
+ 
+    google.maps.event.addDomListener(window, 'load', function() {
+        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+ 
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        console.log("Could not get location");
+        var map = new google.maps.Map(document.getElementById("mapaGoogle"), mapOptions);
+ 
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+        });
+ 
+        $scope.map = map;
+    });
+ 
 
 }])
    
@@ -48,11 +72,15 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('histRicoCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('histRicoCtrl', ['$scope', '$stateParams', 'Alert', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, Alert) {
+  $scope.list = Alert.all();
+  //Api.getAlerts().then(function(result) {
+  //  console.log(result); 
+  //  //$scope.list = result.data;   
+  // })
 
 }])
    
@@ -72,24 +100,24 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('alertaDetalhadoCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('alertaDetalhadoCtrl', ['$scope', '$stateParams', 'Alert',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, Alert) {
+  $scope.alerta = Alert.get($stateParams.idAlert);
 
 }])
    
-.controller('fotoDoAlertaCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('fotoDoAlertaCtrl', ['$scope', '$stateParams', 'Alert',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, Alert) {
+  $scope.alerta = Alert.get($stateParams.idAlert);
 
 }])
  //Novos codigos
 //Implementação camera
-MeuApp.controller('CameraAppCtrl', function($scope, $cordovaCamera) {
+.controller('CameraAppCtrl', function($scope, $cordovaCamera) {
     $scope.takePicture = function() {
         var options = {
             quality: 80,
@@ -112,7 +140,7 @@ MeuApp.controller('CameraAppCtrl', function($scope, $cordovaCamera) {
 })
 
 // Implementação GPS
-MeuApp.controller('GeoCtrl', function($scope, $cordovaGeolocation) {
+.controller('GeoCtrl', function($scope, $cordovaGeolocation) {
 //criado proxima linha para se ter funcão para chamar através botão
 $scope.takeGPS = function() {
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
@@ -121,8 +149,8 @@ $scope.takeGPS = function() {
     .then(function (position) {
       var lat  = position.coords.latitude
       var long = position.coords.longitude
-      //criado procima linha para imprimir uma das variaveis de posição no log
-      console.log(lat);
+      //criado proxima linha para imprimir uma das variaveis de posição no log
+      //console.log(lat);
     }, function(err) {
       // error
     });
@@ -156,7 +184,7 @@ $scope.takeGPS = function() {
   }
 })
 //Funcao de cadastrar usuario
-MeuApp.controller('funcaoCadastrar', function ($scope) {
+.controller('cadastroCtrl', function ($scope, $Api) {
 
 	$scope.incluirUsuario = function(){
 		
@@ -181,47 +209,29 @@ MeuApp.controller('funcaoCadastrar', function ($scope) {
 	}	
 	
 })
-
-//Função para label
-MeuApp.controller('funcaoLabel', function ($scope) {
-
-	$scope.labelTituloAlerta = "Árvore Caída";
-	$scope.labelDataHoraAlerta = "12/05/17 - 18:03h";
-	$scope.labelUltimaDescricaoAlerta = "Transito interrompido na Av. Central";
-	$scope.labelPenultimaDescricaoAlerta = "Relato de árvore caída no centro";
-	$scope.labelAntepenultimaDescricaoAlerta = "Possível problema no Bairro Centro";
-})
-
 //implemento da notificação 
-MeuApp.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope) {
   
 });
-//Implementação da comunicação com a API
-MeuApp.controller('listaAlertCtrl', function($scope, Api) {
-
-   Api.getAlerts().then(function(result) {
-   console.log(result); 
-   $scope.list = result.data;   
-  })
-});
-
 //implementação do Maps
-MeuApp.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
-  var options = {timeout: 10000, enableHighAccuracy: true};
+// .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+//   var options = {timeout: 10000, enableHighAccuracy: false};
  
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+//   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
  
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
  
-    var mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+//     var mapOptions = {
+//       center: latLng,
+//       zoom: 15,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
  
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+//     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
  
-  }, function(error){
-    console.log("Could not get location");
-  });
-});
+//   }, function(error){
+//     console.log("Could not get location");
+//   });
+// })
+
+//implementação Maps

@@ -5,15 +5,15 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var MeuApp = angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'app.directives','app.services',])
+angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'app.directives','app.services',])
 
 .config(function($ionicConfigProvider, $sceDelegateProvider){
 
-  $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
+  $sceDelegateProvider.resourceUrlWhitelist(['*://localhost:3000/**', 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
 
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $cordovaPush) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -27,36 +27,52 @@ var MeuApp = angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'ap
     }
 
 //Inicio da função de receber notificação no App
-var push = PushNotification.init({ "android": {"senderID": "464935961377", icon : "icon"},
+var androidConfig = {
+    "senderID": "464935961377",
+  };
 
-        "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-   /*
-   Este é o evento que será chamado assim que o GCM responder a requisição com o id do dispositivo.
-   É neste método que devendo mandar o id e armazenar em nosso servidor para enviarmos notificações posteriormente
-   */
+  document.addEventListener("deviceready", function(){
+    $cordovaPush.register(androidConfig).then(function(result) {
+      // Success
+    }, function(err) {
+      // Error
+    })
 
-   push.on('registration', function(data) {
+    $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+      switch(notification.event) {
+        case 'registered':
+          if (notification.regid.length > 0 ) {
+            alert('registration ID = ' + notification.regid);
+          }
+          break;
 
-       console.log(data);
-       alert(data.registrationId);
+        case 'message':
+          // this is the actual push notification. its format depends on the data model from the push server
+          alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+          break;
 
-   });
+        case 'error':
+          alert('GCM error = ' + notification.msg);
+          break;
 
-    // Este é o evento no qual implementando o comportamento do nosso app
-    // quando o usuário clicar na notificação
+        default:
+          alert('An unknown GCM event has occurred');
+          break;
+      }
+    });
 
-    push.on('notification', function(data) {
 
-       alert('Notificação acionada, agora deve-se implementar a navegação no app de acordo com os dados: ' + JSON.stringify(data));
+    // WARNING: dangerous to unregister (results in loss of tokenID)
+    $cordovaPush.unregister(options).then(function(result) {
+      // Success!
+    }, function(err) {
+      // Error
+    })
 
-   });
+  }, false);
 
-   push.on('error', function(e) {
 
-       alert('registration error: ' + e.message);
-
-   });
-   //fim codigo de chamar notificação
+//fim codigo de chamar notificação
 
   });
 }) //fim função ready (padrao)

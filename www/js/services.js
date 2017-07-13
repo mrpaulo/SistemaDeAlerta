@@ -1,29 +1,113 @@
 angular.module('app.services', [])
 
 .factory('Api', function($q, $http) {
-   return{
+  return{
+
 
      getAlerts: function() {
        var promessa = $q.defer();
 
-       $http.jsonp('http://localhost:3000/alerts').then(
+       $http.jsonp('https://safe-mountain-31492.herokuapp.com/', {jsonpCallbackParam: 'callback'}).then(
        		function(result){
        			console.log(result)
        		}
 
        	);
        return promessa.promise;
-     },
+     }, 
 
      addUser: function(usuario){
-     	return $http.put("http://localhost:3000/users", usuario);
+     	return $http.post('https://safe-mountain-31492.herokuapp.com/', usuario);
      } 
-
-   }
+  }
 }) 
 
-.service('BlankService', [function(){
+.service('Alert', [function(){
 
+var list = [
+  {
+    "id": 5,
+    "type_alert": 2,
+    "title": "Ponte Interditada",
+    "last_description": "Estrada rural interditada ",
+    "penultimate_description": "Rua Joaquim alagada",
+    "antepenultimate_description": "Rio Subindo rápido",
+    "date_hour": "09/07/2017 - 17:57 h",
+    "url_img": "img/thumbnailAmarelo.jpg",
+    "photo": "http://res.cloudinary.com/dht8hrgql/image/upload/v1499814594/ImagensAlertas/5.jpg"
+  },
+  {
+    "id": 2,
+    "type_alert": 2,
+    "title": "Desmoronamento",
+    "last_description": "Rua Brasil interditada",
+    "penultimate_description": "",
+    "antepenultimate_description": "",
+    "date_hour": "10/05/2017 - 19:58 h",
+    "url_img": "img/thumbnailAmarelo.jpg",
+    "photo": "http://res.cloudinary.com/dht8hrgql/image/upload/v1499814587/ImagensAlertas/2.jpg"
+  },
+  {
+    "id": 3,
+    "type_alert": 1,
+    "title": "Enchente",
+    "last_description": "Moradores deixar suas casas",
+    "penultimate_description": "",
+    "antepenultimate_description": "",
+    "date_hour": "10/05/2017 - 20:00 h",
+    "url_img": "img/thumbnailVermelho.jpg",
+    "photo": "http://res.cloudinary.com/dht8hrgql/image/upload/v1499814594/ImagensAlertas/3.jpg"
+  },
+  {
+    "id": 4,
+    "type_alert": 2,
+    "title": "Cheia de Rio",
+    "last_description": "Rua Brasil interditada ",
+    "penultimate_description": "Rua Joaquim alagada",
+    "antepenultimate_description": "Rio Subindo rápido",
+    "date_hour": "02/06/2017 - 17:26 h",
+    "url_img": "img/thumbnailAmarelo.jpg",
+    "photo": "http://res.cloudinary.com/dht8hrgql/image/upload/v1499814594/ImagensAlertas/4.jpg"
+  },  
+  {
+    "id": 1,
+    "type_alert": 3,
+    "title": "Arvore Caída",
+    "last_description": "Bombeiros trabalhando para desobstruir avenida ",
+    "penultimate_description": "Árvore caída da Avenida Central",
+    "antepenultimate_description": "",
+    "date_hour": "02/06/2017 - 17:39 h",
+    "url_img": "img/thumbnailVerde.jpg",
+    "photo": "http://res.cloudinary.com/dht8hrgql/image/upload/v1499814465/ImagensAlertas/1.jpg"
+  }
+];
+
+return {
+  all: function(){
+    return list;
+  },
+  get: function(idAlert) {
+    for (var i = 0; i < list.length; i++){
+      if(list[i].id === parseInt(idAlert)){
+        return list[i];
+      }
+    }
+      return null;
+  },
+  last: function(){
+    for (var i = 0; i < list.length; i++){
+      if(list[i].id > list[i+1].id){
+        return list[i];
+      }
+    }
+  }
+}
+
+
+
+
+
+//original
 }]);
 
 

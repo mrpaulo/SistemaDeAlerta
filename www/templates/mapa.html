@@ -1,19 +1,22 @@
 <ion-view title="Mapa" id="page3">
-  <ion-content padding="true" class="has-header" ng-controller="funcaoLabel">
-    <div style="margin: 0px; line-height: 50px;  text-align: center;">
-      <div id="map" ><img src="img/ex_maps.jpg" width="380" height="290"></div>
-    </div>
-    <div class="item item-body" id="mapa-list-item-container8" >
-      <div id="mapa-markdown16" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">{{labelTituloAlerta}}</p>
+  <ion-content>
+
+   
+      <div id="mapaGoogle" data-tap-disabled="true" style="visibility: visible; position: relative; overflow: scroll; width: auto; height: auto;">
+        <img src="img/ex_maps.jpg">
       </div>
-      <div id="mapa-markdown17" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">{{labelDataHoraAlerta}}</p>
-      </div>
-      <div id="mapa-markdown18" class="show-list-numbers-and-dots">
-        <p style="margin-top:0px;color:#000000;">{{labelUltimaDescricaoAlerta}}</p>
-      </div>
-    </div>
-    <a ui-sref="tabsController.alertaDetalhado" id="mapa-button4" class="button button-positive  button-block">Detalhes</a>
+
+      <div class="item item-body" id="mapa-list-item-container8">
+        <div id="mapa-markdown16" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">Título: {{alerta.title}}</p>
+        </div>
+        <div id="mapa-markdown17" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">Data e hora: {{alerta.date_hour}}</p>
+        </div>
+        <div id="mapa-markdown18" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">Descrição recente: {{alerta.last_description}}</p>
+        </div>
+      </div>      
+    <a href="#/page1/page10/{{alerta.id}}" class="button button-positive  button-block">Detalhes</a>  
   </ion-content>
 </ion-view>
