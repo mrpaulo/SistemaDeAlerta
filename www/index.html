@@ -4,22 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-
     
-    
-    <script src="lib/ionic/js/ionic.bundle.js?ionicCachebuster=31359"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+   
+    <!-- Firebase & AngularFire -->
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/angularfire/dist/angularfire.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="js/ng-cordova.min.js?ionicCachebuster=31359"></script>
+    <script src="js/ng-cordova.min.js"></script>
     <!-- //maps-->
-    <script src="cordova.js?ionicCachebuster=31359"></script>
+    <script src="cordova.js"></script>
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    
-    <link href="lib/ionic/css/ionic.css?ionicCachebuster=31359" rel="stylesheet">
+    -->    
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     
 
     <style type="text/css">
@@ -51,20 +51,15 @@
       }
     </style>
 
-    <script src="js/app.js?ionicCachebuster=31359"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+    <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
     
-    <script src="js/controllers.js?ionicCachebuster=31359"></script>
-    <script src="js/routes.js?ionicCachebuster=31359"></script>
-    
-     
-    <script src="js/directives.js?ionicCachebuster=31359"></script>
-    <script src="js/services.js?ionicCachebuster=31359"></script>
-    
-
-    
-    <script src="lib/ionicuirouter/ionicUIRouter.js?ionicCachebuster=31359"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyBxRjLJ4PWWNUhr6zaG7kZGsdDJ4vQ2uEo"></script>
-
+         
   </head>
   <body ng-app="app" animation="slide-left-right-ios7">
   <div>

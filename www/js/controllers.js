@@ -52,15 +52,25 @@ function ($scope, $stateParams, $ionicLoading, Alert) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-
+  
+  $scope.cadastroUsuario = function(cadastro){
+        
+      console.log("Acontece: ");
+      console.log(cadastro);
+  };
 
 }])
       
-.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, $state) {
+  $scope.login = function(user){
+    console.log(user);
+    console.log("Could not get location");
+    //$state.go('tabsController.inicio');
+  };
+  
 
 }])
    
@@ -72,11 +82,12 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('histRicoCtrl', ['$scope', '$stateParams', 'Alert', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('histRicoCtrl', ['$scope', '$stateParams', 'Alert', 'Itens', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, Alert) {
+function ($scope, $stateParams, Alert, Itens) {
   $scope.list = Alert.all();
+  $scope.item = Itens.todos();
   //Api.getAlerts().then(function(result) {
   //  console.log(result); 
   //  //$scope.list = result.data;   
@@ -183,32 +194,7 @@ $scope.takeGPS = function() {
     });
   }
 })
-//Funcao de cadastrar usuario
-.controller('cadastroCtrl', function ($scope, $Api) {
 
-	$scope.incluirUsuario = function(){
-		
-		/*var usuario = { "user" : {
-                              "type_user" : 1,
-              								"name_user" : $scope.funcaoIncluir.nome,								
-              								"phone" : $scope.funcaoIncluir.cel,
-              								"localization_user" : $scope.funcaoIncluir.senha
-                            }
-								};*/
-    var usuario = { "user" : { "type_user" : 1, "name_user" : "Segundo User", "phone" : "9889988", "localization_user" : "34,35", "password" : "12345", "notification_phone" : true}};
-                
-    Api.addUser(usuario);
-
-		$scope.funcaoIncluir = {
-								"nome" : "",
-								"idBairro" : "",
-								"cel" : "",
-								"email" : "",
-								"senha" : "",
-								};
-	}	
-	
-})
 //implemento da notificação 
 .controller('DashCtrl', function($scope) {
   

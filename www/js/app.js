@@ -5,13 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'app.directives','app.services',])
+angular.module('app', ['ionic', 'firebase', 'ngCordova', 'app.controllers', 'app.routes', 'app.directives','app.services',])
 
 .config(function($ionicConfigProvider, $sceDelegateProvider){
 
   $sceDelegateProvider.resourceUrlWhitelist(['*://localhost:3000/**', 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
 
 })
+
+.constant('FirebaseUrl', 'sistemadealertaprmr.firebaseapp.com')
+.service('rootRef', ['FirebaseUrl', Firebase])
 
 .run(function($ionicPlatform, $rootScope, $cordovaPush) {
   $ionicPlatform.ready(function() {
@@ -20,11 +23,26 @@ angular.module('app', ['ionic', 'ngCordova', 'app.controllers', 'app.routes', 'a
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-    }
+    };
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
-    }
+    };
+
+// Initialize the Firebase SDK  
+
+//var ref = new Firebase("https://sistemadealertaprmr.firebaseio.com/");
+
+
+  var config = {
+    apiKey: 'AIzaSyBiQcQbc2-p-76kVMNynXefhVAUQXju0Cs',
+    authDomain: 'sistemadealertaprmr.firebaseapp.com',
+    databaseURL: 'https://sistemadealertaprmr.firebaseio.com/',
+    storageBucket: 'gs://sistemadealertaprmr.appspot.com/',          
+  };
+  firebase.initializeApp(config);
+  var rootRef = firebase.database().ref();
+
 
 //Inicio da função de receber notificação no App
 var androidConfig = {
@@ -69,13 +87,14 @@ var androidConfig = {
       // Error
     })
 
-  }, false);
+  }, false);//fim codigo de chamar notificação
 
 
-//fim codigo de chamar notificação
+
 
   });
 }) //fim função ready (padrao)
+
 
 /*
   This directive is used to disable the "drag to open" functionality of the Side-Menu
@@ -129,5 +148,6 @@ var androidConfig = {
       });
     }
   };
+
 });
 

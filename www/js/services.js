@@ -1,4 +1,6 @@
-angular.module('app.services', [])
+angular.module('app.services', ['firebase'])
+
+.factory('Auth', Auth)
 
 .factory('Api', function($q, $http) {
   return{
@@ -21,6 +23,32 @@ angular.module('app.services', [])
      } 
   }
 }) 
+
+ .factory('Itens',[
+   '$firebaseArray','$firebaseObject',
+   function($firebaseArray, $firebaseObject) {
+     return {
+      //retorna la referencia a la base de datos 'todos'
+      allRef: function(){
+        return new Firebase('https://sistemadealertaprmr.firebaseio.com/');
+      },
+      //La referencia la retorna como un array de firebase
+      todos: function(){
+        return $firebaseArray(this.allRef());
+      },
+      //retorna la referencia  a un objeto 'todo'
+      getRef: function(id){
+        return new Firebase('https://sistemadealertaprmr.firebaseio.com/' + id);
+      },
+      //La referencia la retorna como un objeto de firebase
+      obter: function(id){
+        return $firebaseObject(this.getRef(id));
+      }
+    };
+   }
+ ])
+
+
 
 .service('Alert', [function(){
 
@@ -104,10 +132,10 @@ return {
 }
 
 
+}]);//original
 
-
-
-//original
-}]);
-
+function Auth(rootRef, $firebaseAuth) {
+  return $firebaseAuth(rootRef);
+}
+Auth.$inject = ['rootRef', '$firebaseAuth'];
 

@@ -3,12 +3,23 @@
     <ion-list id="histRico-list5">
       <div ng-repeat="lists in list">
         <ion-item class="item-thumbnail-left" href="#/page1/page10/{{lists.id}}">
-          <img src={{lists.url_img}}>
+          <img src="{{lists.url_img}}">
           <h2>Título: {{lists.title}}</h2>
           <p>Data e hora: {{lists.date_hour}}</p>
           <p>Descrição: {{lists.last_description}}</p> 
         </ion-item>   
       </div>
-    </ion-list>   
+    </ion-list> 
+    <p>Do firebase:</p>
+      <ion-list id="histRico-list5">
+      <div ng-repeat="item in itens">
+        <ion-item class="item-thumbnail-left" href="#/page1/page10/{{lists.id}}">
+          <img src="{{item.url_img}}">
+          <h2>Título: {{item.title}}</h2>
+          <p>Data e hora: {{item.date_hour}}</p>
+          <p>Descrição: {{item.last_description}}</p> 
+        </ion-item>   
+      </div>
+    </ion-list> 
   </ion-content>
 </ion-view>

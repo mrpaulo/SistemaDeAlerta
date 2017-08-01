@@ -1,32 +1,32 @@
-<ion-view title="Cadastro" id="page4" ng-controller="cadastroCtrl">
+<ion-view title="Cadastro" id="page4">
+
   <ion-content padding="true" class="has-header">
-    <form id="cadastro-form1" class="list" ng-model="funcaoIncluir">
+    <form id="cadastroForm" name="cadastroForm" class="list" ng-model="cadastro">
       <label class="item item-input" id="cadastro-input1">
-        <span class="input-label">Nome</span>
-        <input type="text" ng-model="funcaoIncluir.nome">
+        <span class="input-label">Nome: </span>
+        <input type="text" ng-required="true" ng-model="cadastro.nome">
       </label>
       <label class="item item-select" id="cadastro-select1"> 
-        <span class="input-label">Bairro</span>
-        <select ng-model="funcaoIncluir.idBairro">
+        <span class="input-label">Bairro: </span>
+        <select ng-model="cadastro.idBairro">
           <!-- <option ng-option="bairro in listaPessoas">{{bairro.idBairro}}</option> -->          
         </select>
       </label>
       <label class="item item-input" id="cadastro-input2">
-        <span class="input-label">Celular</span>
-        <input type="tel" ng-model="funcaoIncluir.cel">
-      </label>
-    </form>
-    <button id="cadastro-button11" class="button button-dark  button-block button-clear icon ion-android-locate" ng-controller="GeoCtrl" ng-click="takeGPS()"> Usar localização GPS</button>
-    <form id="cadastro-form3" class="list">
+        <span class="input-label">Celular: </span>
+        <input type="tel" ng-required="true" ng-model="cadastro.cel">
+      </label>  
       <label class="item item-input" id="cadastro-input5">
-        <span class="input-label">Email</span>
-        <input type="email" ng-model="funcaoIncluir.email">
+        <span class="input-label">Email: </span>
+        <input type="email" ng-required="true" ng-model="cadastro.email">        
       </label>
       <label class="item item-input" id="cadastro-input9">
-        <span class="input-label">Senha </span>
-        <input type="text" ng-model="funcaoIncluir.senha">
+        <span class="input-label">Senha: </span>
+        <input type="text" ng-required="true" ng-model="cadastro.senha">
       </label>
+        <button id="cadastro-button11" class="button button-dark  button-block button-clear icon ion-android-locate" ng-controller="GeoCtrl" ng-click="takeGPS()"> Usar localização GPS</button>    
     </form>
-    <button id="cadastro-button1" class="button button-positive  button-block" ng-click="incluirUsuario()">Cadastrar</button>
+<button id="cadastro-button1" class="button button-positive  button-block" ng-disabled="cadastroForm.$invalid" ng-click="cadastroUsuario(cadastro)">Cadastrar</button>
+    
   </ion-content> 
 </ion-view>
